@@ -1,3 +1,4 @@
+// 主页内容渲染
 $.get('/ajax/index',function(d){
    var windowWidth = $(window).width();
    if(windowWidth<320){

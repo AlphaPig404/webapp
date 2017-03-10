@@ -1,12 +1,18 @@
 
 var express = require('express');//引入express框架
 var app = express();//实例一个express对象
+var qs = require('querystring');
 
 
-// 使用模板引擎ejs
+//================== 使用模板引擎ejs=======================
+// var views = require('co-views');
+// var render = views('./view',{
+// 	map:{html:'ejs'}
+// });
 app.set('views','./views');
 app.set('view engine','ejs');
 
+//======================页面请求处理============================
 app.get('/',function(req,res) {
 	res.render('index')
 });
@@ -16,12 +22,12 @@ app.get('/backet',function(req,res) {
 });
 
 app.get('/book',function(req,res) {
-	var params = querystring.parse(req._parsedUrl.query);
+	var params = qs.parse(req._parsedUrl.query);
 	var bookId = params.id;
 	res.render('book',{nav:'书籍详情',bookId:bookId});
 });
 
-app.get('/readcer',function(req,res) {
+app.get('/reader',function(req,res) {
 	res.render('reader');
 });
 
@@ -49,12 +55,12 @@ app.get('/category',function(req,res) {
 	res.render('category',{nav:'分类'});
 });
 
-// ---------------静态资源管理---------------------
+// =========================静态资源管理======================
 app.use('/public',express.static('./public'));
 
 
-// -------------mock数据和后台数据获取---------------
-var qs = require('querystring');
+//=====================mock数据和后台数据获取==================
+
  
 var service = require('./service/WebAppService.js');
 app.get('/api_test',function(req,res){
@@ -124,7 +130,7 @@ app.get('/ajax/search',function(req,res){
 	});
 });
 
-
+//=============启动服务器，监听localhost的3000端口=================
 var server = app.listen(3000, function(){
   console.log('Example server is started');
 });

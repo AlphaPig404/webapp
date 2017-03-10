@@ -56,7 +56,7 @@ exports.get_female_data = function(channelId) {
 	return content;
 }
 
-
+// 线上接口转发
 exports.get_search_data = function(start, end, keyword,callback) {
 		var http = require('http');
 		var qs = require('querystring');
@@ -76,19 +76,19 @@ exports.get_search_data = function(start, end, keyword,callback) {
 		// 开启一个请求对象
 		req_obj = http.request(http_request, function(_res) {
 			var content='';
-			_res.setEncoding('utf8'); // 设定返回的数据
+			_res.setEncoding('utf8'); // 设定返回的数据格式
 
 			_res.on('data', function(chunk) {
-				content += chunk;   // 分段返回
+				content += chunk;   // 数据是分段返回的
 			});
 
 			_res.on('end', function(e) {
-				callback(content);
+				callback(content);	// 数据完全返回
 			});
 
 		});
 		req_obj.on('error', function(e) {
-
+			// 请求出错的回调
 		});
 
 		req_obj.end();//发送请求
