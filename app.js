@@ -1,7 +1,7 @@
 
 var express = require('express');//引入express框架
 var app = express();//实例一个express对象
-var qs = require('querystring');
+var qs = require('querystring');// 解析URL
 
 
 //================== 使用模板引擎ejs=======================
