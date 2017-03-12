@@ -131,6 +131,6 @@ app.get('/ajax/search',function(req,res){
 });
 
 //=============启动服务器，监听localhost的3000端口=================
-var server = app.listen(3000, function(){
+var server = app.listen(1000, function(){
   console.log('Example server is started');
 });
