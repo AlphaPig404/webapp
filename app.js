@@ -14,7 +14,11 @@ app.set('view engine','ejs');
 
 //======================页面请求处理============================
 app.get('/',function(req,res) {
-	res.render('index')
+	res.render('index');
+});
+
+app.get('/bookshop',function(req,res){
+	res.render('index');
 });
 
 app.get('/backet',function(req,res) {

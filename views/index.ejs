@@ -7,6 +7,51 @@
 		<link rel="stylesheet" type="text/css" href="/public/css/reset.css">
 		<link rel="stylesheet" type="text/css" href="/public/css/index.css">
 		<title>书城首页</title>
+		<style>
+			.modal{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				z-index: 3;
+				background-color: rgba(7,17,27,0.5);
+			}
+			.modal .qb-wrapper{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 380px;
+				height: 500px;
+				margin-left: -190px;
+				margin-top: -270px;
+				background-color: #fff;
+				border-radius: 4px;
+			}
+			.modal .qb-wrapper .qb{
+				padding: 20px;
+			}
+			.modal .qb-wrapper .qb>img{
+				width: 100%;
+			}
+			.modal .qb-wrapper .test{
+				font-size: 20px;
+				color: #666;
+				text-align: center;
+			}
+			.modal .qb-wrapper .cancle{
+				margin: 20px auto;
+				width: 60%;
+				height: 40px;
+				font-size: 20px;
+				line-height: 40px;
+				color: #fff;
+				text-align: center;
+				background-color: #62b900;
+				border-radius: 2px;
+			}
+			.modal .qb-wrapper .cancle:hover{
+				background-color: rgba(98,185,0,0.7);
+			}
+		</style>
 	</head>
 	<body>
 		<div id="app" :style="{width:screen_width+'px'}" style="overflow:hidden">
@@ -28,9 +73,46 @@
 					<% include include/index-shelf.html %>
 				</div>
 			</div>
+			<div class="modal" style="display: none">
+				<div class="qb-wrapper">
+					<div class="qb">
+					<img src="http://ofwmbpctf.bkt.clouddn.com/1489417092.png" alt="二维码">
+					</div>
+					<p class="test">请使用手机浏览器扫码体验</p>
+					<p class="test">(不要使用微信扫一扫)</p>
+					<div id="cancleBtn" class="cancle">继续浏览网页版</div>
+				</div>
+			</div>
 		</div>
 	</body>
-	<script src="/public/js/lib/vue2.js"></script>
 	<script src="/public/js/lib/zepto.js"></script>
+	<script src="/public/js/lib/vue2.js"></script>
 	<script src="/public/js/index.js"></script>
+	<script type="text/javascript">
+	!function(){
+		var pathName= window.location.pathname;
+		if (pathName==='/bookshop') {
+			showModal();
+		}
+		function showModal(){
+			var isMobile = false;//默认PC端
+			function mobile() {
+			    try{
+			        document.createEvent("TouchEvent");
+			        return true;
+			    }
+			    catch(e){
+			        return false;
+			    }
+			}
+			isMobile=mobile();
+			if (!isMobile) {
+				$('.modal').show();
+				$("#cancleBtn").one('click',function(){
+					$('.modal').hide();
+				});
+			}
+		}
+	}();
+	</script>
 </html>
