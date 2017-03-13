@@ -2,6 +2,7 @@
 			height: 100%;
 			overflow: hidden;
 			position: relative;
+            float: left;
 		}
 		.container-scroll{
 			position: absolute;
@@ -443,4 +444,154 @@
 
 .book-table li>* {
     display: inline-block;
+}
+
+.shelf__top {
+        padding: 10px 20px 0;
+    }
+    .shelf__top .shelf-search {
+        margin-right: 46px;
+    }
+    .shelf-search {
+        font-size: 12px;
+        color:#ccc;
+        border:1px solid #eee;
+        border-radius: 4px;
+        line-height: 36px;
+        background:url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01dSYLeWtSR/tY73MgTfVw7UAS.png) no-repeat 10px center;
+        background-size: 14px;
+        padding-left: 32px;
+    }
+    .shelf__switch {
+        width: 36px;
+        height: 36px;
+        float: right;
+        border-radius: 4px;
+        background:url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01yLF3fEj8l/b7UfAdlfufQKML.png) no-repeat center;
+        background-size: 16px;
+        border:1px solid #eee;
+    }
+
+.shelf .book-list .u-book{
+    padding:13px 20px;
+    width: auto; 
+}
+.u-book .book-cover {
+    float: left;
+    margin-right: 10px;
+}
+.u-book .info {
+    padding-top: 1.2em;
+}
+.header-tab{
+        padding: 0px 90px;
+        text-align: center;
+        line-height: 44px;
+        background: #efeff0;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+    }
+    .header-tab i {
+        bottom: -1px;
+    }
+    .header-tab i:before{
+        content:'';
+        display: block;
+        height: 2px;
+        width: 34px;
+        margin:0 auto;
+        background: #777;
+    }
+    .header-tab a:before{
+        content: '\4e66\67b6';
+        display:block;
+        margin: 0 auto; 
+        width:2em;
+    }
+    .header-tab a:first-child:before{
+         content: '\4e66\57ce';
+    }
+    .header-user {
+        position: absolute;
+        right: 0px;
+        top:0px;
+        width: 44px;
+        height: 44px;
+        background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01j041d5DOT/boUg2EJlVetOMC.png) no-repeat center;
+        background-size: 16px;
+    }
+    .header-checkin{
+        position: absolute;
+        left: 0px;
+        top:0px;
+        width: 44px;
+        height: 44px;
+        background: url(http://image.read.duokan.com/mfsv2/download/s010/p01O5K5DzsAZ/2ZODzjwkRQh7l3.png) no-repeat center;
+        background-size: 22px;
+    }
+    .Swipe-tab {
+        position: relative;
+        overflow: hidden;
+        z-index:1;
+    }
+    .Swipe-tab i {
+        position: absolute;
+        left: 0;
+        -webkit-transition:-webkit-transform .3s ease-out;
+    }
+    .Swipe-tab a {
+        float: left;
+        text-align: center;
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+    }
+    
+    .Swipe-tab_2 a {
+        width: 50%;
+    }
+    
+    .Swipe-tab__on{
+        color: #ff6600;
+    }
+    .f-cb:after{
+        clear:both;
+        content: '';
+        display: block;
+        height: 0;
+        overflow:hidden;
+        visibility: hidden;
+    }
+/*common-header*/
+    .top {
+        position: relative;
+        height: 44px;
+        border-bottom: 1px solid #ddd;
+        font: 15px/45px a;
+        color:rgba(0,0,0,0.7);
+        background-color: #efeff0;
+    }
+    .top__back {
+        float: left;
+        width: 42px;
+        height: 44px;
+    }
+    .top__back:before {
+        content: '';
+        display: block;
+        margin: 15px 0 0 16px;
+        width: 10px;
+        height: 16px;
+        background:url(/public/imgs/back.png) no-repeat;
+        background-size: 10px 16px;
+    }
+
+    .header-home {
+        float: right;
+        width: 44px;
+        height: 44px;
+        background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01eZH42sBV7/QTS90E2ZVritaa.png) no-repeat center;
+        background-size: 16px;
+    }
+
+.book_city, .book_shelf{
+    float: left;
 }

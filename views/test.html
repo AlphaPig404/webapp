@@ -3,8 +3,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>测试页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 </head>
 <body>
+	<div id="app">
+		<p class="mont" :class="message" :style="{width:nub+'px',transitionDuration:nub+'s',transform:tran}" style="font-size: 20px;">{{message}}</p>
+		<p class="mont">{{message}}</p>
+		<ul>
+			<li v-for="item in items">
+				<p :name="item.name+'px'" :href="'/book?id='+item.msg">{{item.msg}}</p>
+			</li>
+		</ul>
+	</div>
+	<script src="../public/js/lib/vue2.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data:{
+				message:'msg',
+				nub: 30,
+				tran: 'translate3d(30px,0px,0px)',
+				items: [
+					{name:'test1',msg:'ms1',act:true},
+					{name:'test2',msg:'ms2',act:false},
+					{name:'test3',msg:'ms3',act:true},
+				]
+			}
+		})
+
+		// 1.挂载点如果是class的话只对第一个dom元素起作用
 	
+	</script>
 </body>
 </html>

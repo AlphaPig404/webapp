@@ -181,26 +181,26 @@
 		<title>书籍详情</title>
 	</head>
 	<body>
-		<div id="app" style="width:{{screen_width}}px;overflow:hidden">
+		<div id="app" :style="{width:screen_width+'px'}" style="overflow:hidden">
 			<% include include/common-header.html %>
-			<div class="container-scroll" style="width:{{screen_width}}px;">
+			<div class="container-scroll" :style="{width:screen_width+'px'}">
 				<div class="book-page">
 					<section class="main-card" style="border-bottom:none">
 						<div class="u-book -detail">
 							<div class="book-cover">
-								<img alt="{{ item.title }}" v-bind:src="item.cover">
+								<img :alt="item.title" :src="item.cover">
 							</div>
 							<div class="info">
-								<h3 class="title">{{ item.title }}</h3>
+								<h3 class="title">{{item.title}}</h3>
 								<p class="author">
-									<span class="author">{{ item.authors }}</span>
+									<span class="author">{{item.authors}}</span>
 								</p>
 								<div class="u-grade">
-									<span class="read">{{ item.score_count }} 个评价</span>
+									<span class="read">{{item.score_count}} 个评价</span>
 								</div>
-								<p class="price">价格：{{ item.price }}书币／千字</p>
+								<p class="price">价格：{{item.price}}书币／千字</p>
 								<p class="count">
-									字数:{{ item.word_count }}字
+									字数:{{item.word_count}}字
 									<span class="u-booktag -serial">连载中</span>
 								</p>
 							</div>
@@ -218,7 +218,7 @@
 						</div>
 						<div class="u-folder">
 							<div class="folder-cnt">
-								{{ item.content }}
+								{{item.content}}
 							</div>
 							<div class="folder-tail">
 								<div>最新：{{ item.lastest }}</div>
@@ -269,7 +269,7 @@
 								<li v-for="book in related">
 									<div class="u-book -vertical">
 										<div class="book-cover">
-											<img title="{{ book.title }}" v-bind:src="book.cover">	
+											<img :title="book.title" :src="book.cover">	
 										</div>
 										<div class="info">
 											<h3 class="title">{{ book.title }}</h3>

@@ -1,5 +1,4 @@
-<style>
-	.top {
+.top {
         position: relative;
         height: 44px;
         border-bottom: 1px solid #ddd;
@@ -29,9 +28,3 @@
         background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01eZH42sBV7/QTS90E2ZVritaa.png) no-repeat center;
         background-size: 16px;
     }
-</style>
-<div class="top">
-	<a class="top__back" href="/"></a>
-	<span class="top__title"><%=nav%></span>
-	<a class="header-home" href="/"></a>
-</div>

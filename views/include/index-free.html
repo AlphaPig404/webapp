@@ -4,14 +4,14 @@
 	</div>
 	<ul class="book-table">
 		<li v-for="item in free">
-			<a href="/book?id={{ item.fiction_id }}">
+			<a :href="'/book?id='+item.fiction_id">
 				<div class="u-book -vertical">
 					<div class="book-cover">
-						<img alt="{{ item.title }}" v-bind:src="item.data.cover">
+						<img :alt="item.title" :src="item.data.cover">
 						<div class="u-tagRT -freefiction"></div>
 					</div>
 					<div class="info">
-						<h3 class="title">{{ item.ad_name }}</h3>
+						<h3 class="title">{{item}}</h3>
 					</div>
 				</div>
 			</a>
