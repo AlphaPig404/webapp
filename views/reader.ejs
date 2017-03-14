@@ -14,13 +14,14 @@
 			body{
 				text-align: left;
 				width: 100%;
-				background-color: #e9dfc7;
+				/*background-color: #fff;*/
 			}
 			.m-read-content{
 				font-size: 14px;
 				color: #555;
 				line-height: 31px;
 				padding: 15px;
+				background-color: #e9dfc7;
 			}
 			.m-read-content h4{
 				font-size: 20px;
@@ -148,6 +149,7 @@
 			}
 			.child-mod span{
 				display: inline-block;
+				margin-right: 20px;
 			}
 			.font-size-button{
 				background:none;
@@ -163,16 +165,34 @@
 				position: relative;
 				width: 30px;
 				height: 30px;
-				border-radius: 15px;
+				border-radius: 50%;
 				background: #fff;
 				display: inline-block;
 				vertical-align: middle;
-				border: 1px #ff7800 solid;
+				border: 1px #8c8c8c solid;
 				margin-right: 10px;
+			}
+			.bk-container.active{
+				border-color: #ff7800;
+			}
+			.bk-container:nth-of-type(1){
+				background-color: #f7eee5;
+			}
+			.bk-container:nth-of-type(2){
+				background-color: #e9dfc7;
+			}
+			.bk-container:nth-of-type(3){
+				background-color: #a4a4a4;
+			}
+			.bk-container:nth-of-type(4){
+				background-color: #cdefce;
+			}
+			.bk-container:nth-of-type(5){
+				background-color: #283548;
 			}
 			.artical-action-mid{
 				position: fixed;
-				z-index: 10002;
+				z-index: 102;
 				width: 100%;
 				height: 40%;
 				top: 30%;
@@ -209,11 +229,13 @@
 					<a href="javascript:" id="large_font" class="font-size-button">大</a>
 					<a href="javascript:" id="small_font" class="font-size-button">小</a>
 				</div>
-				<div class="child-mod">
+				<div class="child-mod" id="changeBg" data-click="1">
 					<span>背景</span>
-					<a href="javascript:" class="bk-container first"></a>
-					<a href="javascript:" class="bk-container second"></a>
-					<a href="javascript:" class="bk-container third"></a>
+					<a href="javascript:" class="bk-container" data-bg="1"></a>
+					<a href="javascript:" class="bk-container active" data-bg="2"></a>
+					<a href="javascript:" class="bk-container" data-bg="3"></a>
+					<a href="javascript:" class="bk-container" data-bg="4"></a>
+					<a href="javascript:" class="bk-container" data-bg="5"></a>
 				</div>
 			</div>
 			<div class="foot-nav" id="foot_nav" style="display: none;">
@@ -289,7 +311,17 @@
 			var $Doc = $(document);
 			var RootContainer = $('#fiction_conntainer')
 			var initFontSize = parseInt(Util.StorageGetter('font-size'))||14;
-			RootContainer.css('font-size',initFontSize);
+			var initColor = Util.StorageGetter('color') || '#666';
+			var initBg =  Util.StorageGetter('bgColor') || '#e9dfc7';
+			RootContainer.css({'fontSize':initFontSize,'color':initColor,'backgroundColor':initBg});
+			var day = Util.StorageGetter('bgColor') || '#283548';
+			if (day != '#283548') {
+				$('#day').show();
+				$('#night').hide();
+			}else{
+				$('#day').hide();
+				$('#night').show();
+			}
 
 			function main(){
 				// todo 入口函数
@@ -368,7 +400,7 @@
 						Dom.$font_container.hide();
 						$(this).find('.font').removeClass('active');
 					}
-				})
+				});
 
 				// 字体面板字体缩小
 				$('#large_font').click(function(){
@@ -378,16 +410,49 @@
 						Util.StorageSetter('font-size',initFontSize);
 					}
 					
-				})
+				});
 				$('#small_font').click(function(){
 					if (initFontSize>12) {
 						initFontSize-=2;
 						RootContainer.css('font-size',initFontSize);
 						Util.StorageSetter('font-size',initFontSize)
 					}
+				});
+
+				// 背景颜色切换
+				function readerChange(bgColor,color,node){
+					$('#fiction_conntainer').css({'backgroundColor':bgColor,'color':color});
+					node.addClass('active').siblings().removeClass('active');
+					Util.StorageSetter('bgColor',bgColor);
+					Util.StorageSetter('color',color);
+				}
+				$('#changeBg').click(function(event){
+					var target = event.target;
+					var bgNo = target.dataset.bg;
+					var $target = $(target);
+					var bgColor = $target.css('background-color');
+					if (bgNo) {
+						readerChange(bgColor,'#666',$target)
+						if(bgNo=='5'){
+							readerChange(bgColor,'#7685a2',$target)
+						}
+					}
 				})
+
 				// 白天/夜间模式切换
-				
+				$('#switch_day').click(function(event){
+					if (day) {
+						$('#day').hide();
+						$('#night').show();
+						day = !day;
+						readerChange('#283548','#7685a2',$($('.bk-container')[4]))
+					}else{
+						$('#day').show();
+						$('#night').hide();
+						day = !day;
+						readerChange('#e9dfc7','#666',$($('.bk-container')[1]));
+					}
+				})
 			}
 
 			main();

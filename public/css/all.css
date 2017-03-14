@@ -5641,5 +5641,7 @@ a.reader__ft-download:before {
     background-image: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p014nDc0lHYW/lDeZ3lL4nmgnmf.png);
 }
 
-
+[v-cloak] {
+  display: none;
+}
 

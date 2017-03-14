@@ -191,15 +191,15 @@
 								<img :alt="item.title" :src="item.cover">
 							</div>
 							<div class="info">
-								<h3 class="title">{{item.title}}</h3>
+								<h3 class="title" v-cloak>{{item.title}}</h3>
 								<p class="author">
-									<span class="author">{{item.authors}}</span>
+									<span class="author" v-cloak>{{item.authors}}</span>
 								</p>
 								<div class="u-grade">
-									<span class="read">{{item.score_count}} 个评价</span>
+									<span class="read" v-cloak>{{item.score_count}} 个评价</span>
 								</div>
-								<p class="price">价格：{{item.price}}书币／千字</p>
-								<p class="count">
+								<p class="price" v-cloak>价格：{{item.price}}书币／千字</p>
+								<p class="count" v-cloak>
 									字数:{{item.word_count}}字
 									<span class="u-booktag -serial">连载中</span>
 								</p>
@@ -217,10 +217,10 @@
 							</div>
 						</div>
 						<div class="u-folder">
-							<div class="folder-cnt">
+							<div class="folder-cnt" v-cloak>
 								{{item.content}}
 							</div>
-							<div class="folder-tail">
+							<div class="folder-tail" v-cloak>
 								<div>最新：{{ item.lastest }}</div>
 							</div>
 						</div>
@@ -232,7 +232,7 @@
 							</div>
 							<div class="folder-cnt">
 								<ul class="m-tag -color">
-									<li class="u-tag" v-for="tag in item.tags">
+									<li class="u-tag" v-for="tag in item.tags" v-cloak>
 										{{ tag }}
 									</li>
 								</ul>
@@ -251,7 +251,7 @@
 											<img title="{{ book.title }}" v-bind:src="book.cover">	
 										</div>
 										<div class="info">
-											<h3 class="title">{{ book.title }}</h3>
+											<h3 class="title" v-cloak>{{ book.title }}</h3>
 										</div>
 									</div>
 								</li>
@@ -272,7 +272,7 @@
 											<img :title="book.title" :src="book.cover">	
 										</div>
 										<div class="info">
-											<h3 class="title">{{ book.title }}</h3>
+											<h3 class="title" v-cloak>{{ book.title }}</h3>
 										</div>
 									</div>
 								</li>
@@ -284,7 +284,7 @@
 							<h1>图书信息</h1>
 						</div>
 						<div class="cnt">
-							<ul class="text">
+							<ul class="text" v-cloak>
 								<li>版权：{{ item.rights }}</li>
 							</ul>
 						</div>
