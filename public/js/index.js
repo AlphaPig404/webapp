@@ -25,7 +25,8 @@
            header_position:0,
            header_duration:0,
            tab_1_class:'Swipe-tab__on',
-           tab_2_class:''
+           tab_2_class:'',
+           shelf_show:false
         },
         created(){
             var self = this;
@@ -38,9 +39,11 @@
                self.free = d.items[5].data.data;
                self.topic = d.items[6].data.data
             },'json');
+           
         },
         methods:{
          tabSwitch:function(pos){
+            this.shelf_show = true;
             this.duration = 0.5;
             this.header_duration = 0.5;
             if(pos == 0){
