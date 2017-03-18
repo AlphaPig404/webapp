@@ -3,7 +3,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
-		<link rel="stylesheet" type="text/css" href="/public/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="../../public/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="../../public/css/include/common-header.css">
+		<title>书籍详情</title>
 		<style type="text/css">
 		.main-card {
 			border-bottom: 10px solid #f5f5f5;
@@ -178,7 +180,6 @@
 			text-align: right;
 		}
 		</style>
-		<title>书籍详情</title>
 	</head>
 	<body>
 		<div id="app" :style="{width:screen_width+'px'}" style="overflow:hidden">
@@ -248,7 +249,7 @@
 								<li v-for="book in author_books">
 									<div class="u-book -vertical">
 										<div class="book-cover">
-											<img title="{{ book.title }}" v-bind:src="book.cover">	
+											<img :alt="book.title" v-bind:src="book.cover">	
 										</div>
 										<div class="info">
 											<h3 class="title" v-cloak>{{ book.title }}</h3>
@@ -293,7 +294,7 @@
 			</div>
 		</div>
 	</body>
-	<script src="/public/js/lib/vue.js"></script>
+	<script src="/public/js/lib/vue2.js"></script>
 	<script src="/public/js/lib/zepto.js"></script>
 	<script src="/public/js/book.js"></script>
 </html>

@@ -37,29 +37,24 @@
 				line-height: 24px;
 			}
 			.u-tab{
-				height: 34px;
-				margin: 10px auto;
-				line-height: 34px;
-				border-radius: 8px;
-				border: 1px solid #858382;
-				font-size: 12px;
-				background-color: rgba(0,0,0,0.9);
+				display: flex;
+				height: 30px;
+				line-height: 30px;
 			}
 			.u-tab li{
 				display: inline-block;
-				width: 49%;
-				border-right: 1px solid #858382;
+				flex: 1;
 				text-align: center;
 				color: #fff;
-			}
-			.u-tab li:last-child{
-				border: none;
+				font-size: 12px;
 			}
 			.m-button-bar{
-				width: 70%;
-				max-width: 800px;
-				padding: 5px;
-				margin: 0 auto;
+				position: fixed;
+				left: 0;
+				bottom: 70px;
+				height: 30px;
+				width: 100%;
+				background-color: rgba(0,0,0,0.9);
 			}
 			.top-nav{
 				position: fixed;
@@ -196,6 +191,7 @@
 				width: 100%;
 				height: 40%;
 				top: 30%;
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
 			}
 		</style>
 		<title>阅读器</title>
@@ -211,18 +207,18 @@
 				<div class="nav-title">返回书架</div>
 			</div>
 			<div id="fiction_chapter_title"></div>
-			<div id="fiction_conntainer" class="m-read-content">
-				<h4>Web Storage</h4>
-				<p>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生浏览器的支持除了IE７及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，值得一提的是IE总是办好事，例如IE7、IE6中的UserData其实就是JavaScript本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持web storage。localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
-				<p>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生浏览器的支持除了IE７及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，值得一提的是IE总是办好事，例如IE7、IE6中的UserData其实就是JavaScript本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持web storage。localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
-				<p>Web Storage的概念和cookie相似，区别是它是为了更大容量存储设计的。Cookie的大小是受限的，并且每次你请求一个新的页面的时候Cookie都会被发送过去，这样无形中浪费了带宽，另外cookie还需要指定作用域，不可以跨域调用。除此之外，Web Storage拥有setItem,getItem,removeItem,clear等方法，不像cookie需要前端开发者自己封装setCookie，getCookie。但是Cookie也是不可以或缺的：Cookie的作用是与服务器进行交互，作为HTTP规范的一部分而存在 ，而Web Storage仅仅是为了在本地“存储”数据而生浏览器的支持除了IE７及以下不支持外，其他标准浏览器都完全支持(ie及FF需在web服务器里运行)，值得一提的是IE总是办好事，例如IE7、IE6中的UserData其实就是JavaScript本地存储的解决方案。通过简单的代码封装可以统一到所有的浏览器都支持web storage。localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
+			<div id="fiction_conntainer" class="m-read-content" style="overflow: scroll;">
+
 			</div>
-			<div class="m-button-bar">
+			
+			<div class="m-button-bar" id="m-button-bar" style="display: none">
 				<ul class="u-tab">
 					<li id="prev_button">上一章</li>
+					<li>1/4</li>
 					<li id="next_button">下一章</li>
 				</ul>
 			</div>
+
 			<div id="font_container" class="nav-pannel" style="display: none;">
 				<div class="child-mod">
 					<span>字号</span>
@@ -283,8 +279,8 @@
 					return $.jsonp({
 						url:url,
 						cache:true,
-						callback:'doukan_fiction_chapter',
-						sucess: function(result){
+						callback:'duokan_fiction_chapter',
+						success: function(result){
 							var data = $.base64.decode(result);
 							var json = decodeURIComponent(escape(data));
 							callback(json);
@@ -305,8 +301,14 @@
 				$day: $('.day'),
 				$font_button: $('#font_button'),
 				$font_container:$('#font_container'),
-				$font_icon: $('#font_button').find('.font')
+				$font_icon: $('#font_button').find('.font'),
+				$button_bar: $('#m-button-bar')
 			};
+			var g_chapter_id=1;
+
+			//滚动状态
+			var scrollFinished = true;
+
 			var $Win = $(window);
 			var $Doc = $(document);
 			var RootContainer = $('#fiction_conntainer')
@@ -327,27 +329,30 @@
 				// todo 入口函数
 				EventHandler();
 				var readerModel = ReaderModel();
-				readerModel.init();
+				var readerUI= ReaderBaseFrame(RootContainer);
+				readerModel.init(readerUI);
 			}
 
 			function ReaderModel(){
 				// todo 实现和阅读器相关的数据交互的方法
 				var chapter_id;
-				var init = function(){
+				var init = function(UIcallback){
 					getFictionInfo(function(){
-						getCurChapterContent(chapter_id,function(){
-
+						getCurChapterContent(chapter_id,function(data){
+							UIcallback&&UIcallback(data);
 						})
 					})
 				}
 				var getFictionInfo = function(callback){
 					$.get('/ajax/chapter',function(data){
-						console.log(data);
+						// 获得章节信息的回调
+						// console.log(data);
+						chapter_id = data.chapters[g_chapter_id].chapter_id; //0
 						callback&&callback();
 					},'json');
 				};
 				var getCurChapterContent = function(chapter_id,callback){
-					$.get('/ajax/chapter'+chapter_id+'.json',function(){
+					$.get('/ajax/chapter_data',{id:chapter_id},function(data){
 						if (data.result ==0 ) {
 							var url = data.jsonp;
 							Util.getJsonp(url,function(data){
@@ -361,8 +366,39 @@
 				}
 			}
 
-			function ReaderBaseFrame(){
+			function ReaderBaseFrame(container){
 				// todo 渲染基本的UI结构
+				// 整章渲染
+				function parseChapterData(jsonData){
+					var jsonObj = JSON.parse(jsonData);
+					var paragraphs = jsonObj.p;
+					var html = '<h4>'+jsonObj.t+'</h4>';
+					for (var i = 0,len=paragraphs.length; i < len; i++) {
+						html +='<p>'+paragraphs[i]+'</p>'
+					};
+					return html;
+				}
+				return function(jsonData){
+					var html = parseChapterData(jsonData);
+					container.html(html);
+				}
+			}
+
+			function ReaderScrollFrame(container){
+					function parseChapterData(jsonData){
+					var jsonObj = JSON.parse(jsonData);
+					var paragraphs = jsonObj.p;
+					var html = '<h4>'+jsonObj.t+'</h4>';
+					for (var i = 0,len=paragraphs.length; i < len; i++) {
+						html +='<p>'+paragraphs[i]+'</p>'
+					};
+					return html;
+					}
+					return function(jsonData){
+						var html = parseChapterData(jsonData);
+						container.append(html);
+						scrollFinished = true;
+					}
 			}
 
 			function EventHandler(){
@@ -373,31 +409,47 @@
 					if (Dom.$top_nav.css('display')=='none') {
 						Dom.$foot_nav.show();
 						Dom.$top_nav.show();
+						Dom.$button_bar.show();
 					}else{
 						
 						Dom.$font_container.hide();
 						Dom.$font_icon.removeClass('active');
 						Dom.$foot_nav.hide();
 						Dom.$top_nav.hide();
+						Dom.$button_bar.hide();
 					}
 				})
 
 				// 滚动隐藏上下边栏
-				$Win.scroll(function(){
+				$Win.scroll(function(event){
 					
 					Dom.$font_container.hide();
 					Dom.$font_icon.removeClass('active');
 					Dom.$foot_nav.hide();
 					Dom.$top_nav.hide();
+					Dom.$button_bar.hide();
+
+					var height = RootContainer.height();
+					var screen_height = window.screen.height;
+					var scroll_height =height-screen_height;
+					if((document.body.scrollTop>=scroll_height-40)&&g_chapter_id<4&&scrollFinished){
+						scrollFinished = false;
+						g_chapter_id += 1;
+						var readerModel = ReaderModel();
+						var readerUI= ReaderScrollFrame(RootContainer);
+						readerModel.init(readerUI);
+					}
 				});
 
 				// 唤起字体面板
 				Dom.$font_button.click(function(){
 					if (Dom.$font_container.css('display')=='none') {
+						Dom.$button_bar.hide();
 						Dom.$font_container.show();
 						Dom.$font_icon.addClass('active');
 					}else{
 						Dom.$font_container.hide();
+						Dom.$button_bar.show();
 						$(this).find('.font').removeClass('active');
 					}
 				});
@@ -437,8 +489,7 @@
 							readerChange(bgColor,'#7685a2',$target)
 						}
 					}
-				})
-
+				});
 				// 白天/夜间模式切换
 				$('#switch_day').click(function(event){
 					if (day) {
@@ -451,6 +502,26 @@
 						$('#night').hide();
 						day = !day;
 						readerChange('#e9dfc7','#666',$($('.bk-container')[1]));
+					}
+				})
+				// 翻页
+				// 上一章
+				$('#next_button').click(function(event){
+					if (g_chapter_id<4) {
+						g_chapter_id += 1;
+						document.body.scrollTop = 0;
+						var readerModel = ReaderModel();
+						var readerUI= ReaderBaseFrame(RootContainer);
+						readerModel.init(readerUI);
+					}
+				});
+				$('#prev_button').click(function(event){
+					if (g_chapter_id>1) {
+						document.body.scrollTop = 0;
+						g_chapter_id -= 1;
+						var readerModel = ReaderModel();
+						var readerUI= ReaderBaseFrame(RootContainer);
+						readerModel.init(readerUI);
 					}
 				})
 			}

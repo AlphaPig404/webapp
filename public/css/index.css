@@ -163,7 +163,7 @@
 }
 
 
-.channel-group { position: relative;}
+.channel-group { positichanon: relative;}
 	.channel-group__header{
 		position: relative;
 		padding: 10px 14px;
@@ -347,7 +347,7 @@
     .book-h5 .book-h5__info {
     	margin-left:100px;
     	padding-top:6px;
-    	background:#fff 
+    	background:#fff;
     }
     .book-h5__title{
     	margin-bottom: 4px;
@@ -371,7 +371,7 @@
     	margin:8px 0 0;
     	height: 2.8em;
     	font:12px/1.4em a;
-    	color:rgb(0,0,0,0.6);
+    	color:rgb(0,0,0,0.6) !important;
     	
         
         /*多行文字截断*/
