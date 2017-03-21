@@ -12,6 +12,7 @@
         data :{
            screen_width:windowWidth,
            double_screen_width:windowWidth*2,
+           fourth_screen_width:windowWidth*4,
            index_header_tab_width:index_header_tab_width,
            top:[],
            hot:[],
@@ -26,7 +27,9 @@
            header_duration:0,
            tab_1_class:'Swipe-tab__on',
            tab_2_class:'',
-           shelf_show:false
+           shelf_show:false,
+           trans:0,
+           sd_duration:0.5
         },
         created(){
             var self = this;
@@ -39,7 +42,21 @@
                self.free = d.items[5].data.data;
                self.topic = d.items[6].data.data
             },'json');
-           
+        },
+        mounted(){
+          this.slide();
+        },
+        watch:{
+          trans(curVal,oldVal){
+            console.log(oldVal);
+            if (oldVal==(-this.screen_width)*2) {
+                setTimeout(()=>{
+                   this.trans = 0 ;
+                  this.sd_duration = 0;
+                },550)
+               // 需要设置时间大于0.5s
+             }
+          }
         },
         methods:{
          tabSwitch:function(pos){
@@ -57,6 +74,16 @@
                this.tab_2_class = "Swipe-tab__on";
                this.tab_1_class = "";
             }
+         },
+         slide:function(){
+           setInterval(() =>{
+             this.sd_duration = 0.5;
+             this.trans -= this.screen_width;
+             // // this.sd_duration = 0;
+             // if (this.trans==(-this.screen_width)*3){
+             //  this.trans = 0;
+             // }
+           },3000)
          }
         }
    })

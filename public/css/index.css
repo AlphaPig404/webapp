@@ -104,7 +104,25 @@
 		border: 1px solid #f5f5f5;
 		border-radius: 2px;
 	}
-	.cover{ width: 100%
+    /*轮播图*/
+    .slider-banner{
+        overflow: hidden;
+        width: 100%;
+    }
+    .slider-wrapper{
+        position: relative;
+        /*width:1500px;*/
+    }
+    .slider-item{
+        float: left;
+        /*width: 375px;*/
+    }
+    .slider-item>a{
+        display: block;
+    }
+	.cover{ 
+        width: 100%;
+        min-height: 36vw
 	}
 
 	.top-home__btn{
