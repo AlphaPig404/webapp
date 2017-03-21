@@ -48,11 +48,11 @@
         },
         watch:{
           trans(curVal,oldVal){
-            console.log(oldVal);
             if (oldVal==(-this.screen_width)*2) {
-                setTimeout(()=>{
-                   this.trans = 0 ;
-                  this.sd_duration = 0;
+              var self = this;
+                setTimeout(function(){
+                   self.trans = 0 ;
+                   self.sd_duration = 0;
                 },550)
                // 需要设置时间大于0.5s
              }
@@ -76,13 +76,10 @@
             }
          },
          slide:function(){
-           setInterval(() =>{
-             this.sd_duration = 0.5;
-             this.trans -= this.screen_width;
-             // // this.sd_duration = 0;
-             // if (this.trans==(-this.screen_width)*3){
-             //  this.trans = 0;
-             // }
+           var self = this;
+           setInterval(function(){
+             self.sd_duration = 0.5;
+             self.trans -= self.screen_width;
            },3000)
          }
         }
