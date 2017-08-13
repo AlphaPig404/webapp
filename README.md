@@ -1,6 +1,5 @@
----
-tags: [WebApp,整站开发] title: 移动书城
----
+# 移动书城
+
 
 ## 项目简介
 一个仿[小米书城](http:www.dushu.xiaomi.com)的WebApp整站开发项目，HTML5、CSS3、Vuejs、Zepto、Express、Ejs框架的综合运用。
