@@ -9,3 +9,18 @@ HTML5来实现标签的语义化,CSS3用来实现页面的动画,Vuejs用来实�
 后面深入学习Vuejs后，会利用Vue-router，Vue-resource，Vue-template
 对项目进行重构。(挖坑。。。。)
 
+## 下载项目
+```
+  git clone https://github.com/AlphaPig404/webapp
+  
+```
+## 运行项目
+```
+  npm install
+  
+```
+```
+  node app.js 或者 npm run dev
+  
+```
+最后浏览器打开localhost:3000查看
